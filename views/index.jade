@@ -1,7 +1,51 @@
 doctype html
 html
     head
-        title Jade Page
+        title Jade Page #{title}
+        script(src='resource/module/jquery/1.11.2/jquery.min.js')
+        script(src='resource/module/bootstrap/3.3.4/js/bootstrap.min.js')
+        script(src='resource/script/decoy-table-generator.js')
+        script(src='resource/script/column-hidder.js')
     body
-        h1 This page is produced by Jade engine
-        p some paragraph here..
+        div
+            table(border='1',bgcolor='#daf0d5')
+                thead
+                tr: th commit
+                    th Author
+                    th Committer
+                    th Repo Name
+
+                tbody
+                    each d in data
+                        tr: td= d.commit
+                            td
+                                ul 
+                                    li 
+                                        b Name:
+                                        span #{d.author.name} 
+                                    li 
+                                        b Email:
+                                        span #{d.author.email}
+                                    li 
+                                        b Time Sec:
+                                        span #{d.author.time_sec}
+                                    li 
+                                        b Tz Offset:
+                                        span #{d.author.tz_offset}
+                            td
+                                 ul 
+                                    li 
+                                        b Name: 
+                                        span #{d.committer.name} 
+                                    li 
+                                        b Email:
+                                        span #{d.committer.email}
+                                    li 
+                                        b Time Sec:
+                                        span #{d.committer.time_sec}
+                                    li 
+                                        b Tz Offset:
+                                        span #{d.committer.tz_offset}
+                            td= d.repo_name
+                        
+

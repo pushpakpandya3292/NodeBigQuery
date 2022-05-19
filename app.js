@@ -8,30 +8,6 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 
-const {BigQuery} = require('@google-cloud/bigquery');
-
-async function createDataset() {
-  // Creates a client
-  const bigquery = new BigQuery();
-
-  // here is the nuxt-hazura is the projectID, github_source_data is the dataset and demo is the table name.
-  const sqlQuery = `SELECT * FROM nuxt-hazura.github_source_data.demo LIMIT 10`;
-
-const options = {
-  query: sqlQuery,
-  // Location must match that of the dataset(s) referenced in the query.
-  location: 'US',
-};
-
-// Run the query
-const [rows] = await bigquery.query(options);
-
-console.log('rows',rows);
-
-}
-createDataset();
-
-
 var app = express();
 
 // view engine setup
@@ -63,4 +39,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+module.exports =app;
